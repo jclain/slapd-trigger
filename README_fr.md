@@ -308,7 +308,6 @@ Pour que la partie modification soit considérée:
     `stop` est accepté aussi.
 
 `match-PARAM: VALUE`
-
 : Vérifier que le paramètre PARAM vaut VALUE. Les paramètres sont les lignes
   d'information fournies par back-sock. NAME peut valoir `operation`, `msgid`,
   `suffix`, `changetype`. En fonction de la façon dont back-sock est configuré,
@@ -339,7 +338,7 @@ Pour que la partie modification soit considérée:
   modifié, et peut valoir `exact` ou `regex`. Par défaut, VALTYPE vaut `regex`.
 
 Par exemple, la règle suivante est activée pour toute modification de l'attribut
-cn sur un objet de la branche ou=People,dc=univ-reunion,dc=fr. Pour l'exemple,
+cn sur un objet de la branche `ou=People,dc=univ-reunion,dc=fr`. Pour l'exemple,
 on requière aussi que la modification doivent porter sur une valeur qui commence
 par "Mister "
 ~~~
