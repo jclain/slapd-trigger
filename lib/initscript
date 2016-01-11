@@ -1,0 +1,64 @@
+#!/bin/bash
+# -*- coding: utf-8 mode: sh -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+### BEGIN INIT INFO
+# Provides:          slapd-trigger
+# Required-Start:    $remote_fs $network $syslog
+# Required-Stop:     $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: OpenLDAP's back-sock trigger
+### END INIT INFO
+
+NAME=slapd-trigger
+PATH=/sbin:/usr/sbin:/bin:/usr/bin
+
+. /lib/lsb/init-functions
+
+# Source the init script configuration
+PYTHON=/usr/bin/python
+SCRIPTDIR="@@dest@@"
+[ "$SCRIPTDIR" == @@"dest"@@ ] && SCRIPTDIR=/usr/local/bin
+SCRIPT="$SCRIPTDIR/slapd-trigger.py"
+PIDFILE="/var/run/$NAME.pid"
+if [ -f "/etc/default/$NAME" ]; then
+    . "/etc/default/$NAME"
+fi
+
+function start_daemon() {
+    log_daemon_msg "Starting $NAME" "$NAME"
+    start-stop-daemon -S -b -q -o -p "$PIDFILE" -x "$PYTHON" -- \
+        "$SCRIPT" --pidfile "$PIDFILE"
+    log_end_msg $?
+}
+
+function stop_daemon() {
+    log_daemon_msg "Stopping $NAME" "$NAME"
+    start-stop-daemon -K -q -o -R TERM/10 -p "$PIDFILE"
+    log_end_msg $?
+}
+
+function daemon_status() {
+    local r
+    start-stop-daemon -T -p "$PIDFILE"; r=$?
+    case $r in
+    0) log_success_msg "$NAME is running";;
+    1) log_failure_msg "$NAME is not running (but PIDFILE exists)";;
+    3) log_failure_msg "$NAME is not running";;
+    4) log_failure_msg "could not access PID file for $NAME";;
+    esac
+    return $r
+}
+
+case "$1" in
+start) start_daemon;;
+stop) stop_daemon;;
+restart|force-reload)
+    stop_daemon
+    start_daemon
+    ;;
+status) daemon_status;;
+*)
+    echo "Usage: $0 {start|stop|restart|force-reload|status}"
+    exit 1
+    ;;
+esac

@@ -1,0 +1,16 @@
+# -*- coding: utf-8 mode: conf -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+
+logfile slapd-trigger.log
+loglevel DEBUG
+pidfile slapd-trigger.pid
+socket_path slapd-trigger.sock
+socket_mode 666
+
+match-modify: cn
+cn: (\S+)(?:\s*(.+))
+replace: sn
+sn: \1
+replace: givenName
+givenName: \2
+replace: displayName
+displayName: \2 \1

@@ -1,0 +1,8 @@
+MODRDN
+msgid: 2
+suffix: dc=univ-reunion,dc=fr
+dn: uid=newdoe,ou=People,dc=univ-reunion,dc=fr
+newrdn: uid=jdoe
+deleteoldrdn: 1
+newSuperior: dc=univ-reunion,dc=fr
+

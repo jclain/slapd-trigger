@@ -1,0 +1,5 @@
+DELETE
+msgid: 2
+suffix: dc=univ-reunion,dc=fr
+dn: uid=jpayet,ou=People,dc=univ-reunion,dc=fr
+

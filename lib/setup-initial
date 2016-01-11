@@ -1,0 +1,16 @@
+#!/bin/bash
+# -*- coding: utf-8 mode: sh -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+
+DEFAULT_SUFFIX=dc=univ-reunion,dc=fr
+
+################################################################################
+scriptdir="$(dirname -- "$0")"
+suffix="${1:-$DEFAULT_SUFFIX}"
+
+maindb="$(slapctl infos -qq dbrdn "$suffix")"
+[ -n "$maindb" ] || {
+    echo "ERROR: Unable to find database RDN for $suffix"
+    exit 1
+}
+
+"$scriptdir/../slapd-trigger.py" -v "maindb=$maindb" --run-state setup

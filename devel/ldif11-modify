@@ -1,0 +1,6 @@
+#11
+dn: uid=newjdoe,ou=People,dc=univ-reunion,dc=fr
+changetype: modrdn
+newrdn: uid=jdoe
+deleteoldrdn: 1
+newsuperior: dc=univ-reunion,dc=fr

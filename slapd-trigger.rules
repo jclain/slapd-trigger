@@ -1,0 +1,54 @@
+# -*- coding: utf-8 mode: conf -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+
+logfile /var/log/slapd-trigger.log
+#loglevel INFO
+loglevel DEBUG
+pidfile /var/run/slapd-trigger.pid
+socket_path /var/run/slapd-trigger.sock
+socket_owner openldap:
+socket_mode 660
+# database for which to configure back-sock in the setup/start/stop states
+var maindb {1}mdb
+
+match-dn: ou=People,dc=univ-reunion,dc=fr
+match-modify: cn
+cn: (\S+)(?:\s*(\S+))
+replace: sn
+sn: \1
+replace: givenName
+givenName: \2
+
+# Initialisation and configuration
+match-state: setup
+dn: cn=module{0},cn=config
+changetype: modify
+add: olcModuleLoad
+olcModuleLoad: back_sock.la
+-
+
+match-state: setup
+dn: olcOverlay=sock,olcDatabase=${maindb},cn=config
+changetype: add
+objectClass: olcConfig
+objectClass: olcOverlayConfig
+objectClass: olcOvSocketConfig
+olcOverlay: sock
+olcDbSocketPath: ${socket_path}
+olcOvSocketOps: modify modrdn add delete
+#olcDbSocketExtensions: binddn peername ssf connid
+#olcOvSocketResps: 
+
+# It is not possible to dynamically change olcOvSocketOps :-(
+#match-state: start
+#dn: olcOverlay=sock,olcDatabase=${maindb},cn=config
+#changetype: modify
+#replace: olcOvSocketOps
+#olcOvSocketOps: modify modrdn add delete
+#-
+#
+#match-state: stop
+#dn: olcOverlay=sock,olcDatabase=${maindb},cn=config
+#changetype: modify
+#replace: olcOvSocketOps
+#olcOvSocketOps: NONE
+#-

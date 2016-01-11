@@ -1,0 +1,10 @@
+# -*- coding: utf-8 mode: sh -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+
+# Python interpreter to use
+#PYTHON=/usr/bin/python
+
+# slapd-trigger.py path
+#SCRIPT=/usr/local/bin/slapd-trigger.py
+
+# PID file path
+#PIDFILE="/var/run/slapd-trigger.pid"

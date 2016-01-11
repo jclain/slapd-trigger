@@ -1,0 +1,12 @@
+ADD
+msgid: 2
+suffix: dc=univ-reunion,dc=fr
+dn: uid=jdoe,ou=People,dc=univ-reunion,dc=fr
+objectClass: inetOrgPerson
+sn: Doe
+givenName: John
+cn: Doe John
+uid: jdoe
+userPassword:: e1NTSEF9emwzcXFCRHh3QzlnVzZiL3NEUTZqandMODdRcXZvTzRlYjVaMStSM
+ 3dLVlptTzdOeU1zazBBPT0=
+

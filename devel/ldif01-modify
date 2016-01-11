@@ -1,0 +1,3 @@
+#01
+dn: uid=jpayet,ou=People,dc=univ-reunion,dc=fr
+changetype: delete

@@ -1,0 +1,110 @@
+# -*- coding: utf-8 mode: conf -*- vim:sw=4:sts=4:et:ai:si:sta:fenc=utf-8
+
+logfile slapd-trigger.log
+loglevel TRACE
+pidfile slapd-trigger.pid
+socket_path slapd-trigger.sock
+socket_mode 666
+
+#match-state: started
+#match-operation: MODIFY
+#match-msgid: 1
+#match-suffix: dc=univ-reunion,dc=fr
+#match-dn: ou=People,dc=univ-reunion,dc=fr
+#match-changetype: modify
+#match-add: attrA1
+#attrA1: value
+#match-add: attrA2
+#match-delete: attrD1
+#attrD1: value
+#match-delete: attrD2
+#match-replace: attrR1
+#attrR1: value
+#match-replace: attrR2
+#add: attr1
+#attr1: add_value1
+#add: attr2
+#delete: attr3
+#attr3: delete_value3
+#delete: attr4
+#replace: attr5
+#attr5: replace_value5_1
+#attr5: replace_value5_2
+#replace: attr6
+#attr6: replace_value6
+#replace: attr7
+#
+#match-add: cn
+#cn: (\w+) (\w+)
+#replace: sn
+#sn: \1
+#replace: givenName
+#givenName: \2
+#
+#match-replace: cn
+#cn: (\w+) (\w+)
+#replace: sn
+#sn: \1
+#replace: givenName
+#givenName: \2
+#
+#match-delete: cn
+#
+#match-dn.regex: uid=(\w+),dc=univ-reunion,dc=fr
+#add: tag
+#tag: ${dn}\1
+#
+#match-modify: sn
+#sn: (.*)
+#match-modify: givenName
+#givenName: (.*)
+#replace: cn
+#cn: \1 \2
+
+match-modify: cn
+cn: (.+)
+add: postalAddress
+postalAddress: modify cn=\1
+
+match-add: cn
+cn: (.+)
+add: postalAddress
+postalAddress: add cn=\1
+
+match-replace: cn
+cn: (.+)
+add: postalAddress
+postalAddress: replace cn=\1
+
+match-delete: cn
+cn: (.*)
+add: postalAddress
+postalAddress: delete cn=\1
+
+match-delete: cn
+add: postalAddress
+postalAddress: delete ALL cn
+
+match-modify: description
+description: (.+)
+add: postalAddress
+postalAddress: modify description=\1
+
+match-add: description
+description: (.+)
+add: postalAddress
+postalAddress: add description=\1
+
+match-replace: description
+description: (.+)
+add: postalAddress
+postalAddress: replace description=\1
+
+match-delete: description
+description: (.*)
+add: postalAddress
+postalAddress: delete description=\1
+
+match-delete: description
+add: postalAddress
+postalAddress: delete ALL description

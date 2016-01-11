@@ -1,0 +1,8 @@
+#00
+dn: uid=jpayet,ou=People,dc=univ-reunion,dc=fr
+objectClass: inetOrgPerson
+sn: Payet
+givenName: Jean
+cn: Payet Jean
+uid: jpayet
+userPassword: {SSHA}KFPzGOHeUnxg4JDNOxT6lspr/tTp3/cFwG9K0TTq2a2MKBAl63hlOg==

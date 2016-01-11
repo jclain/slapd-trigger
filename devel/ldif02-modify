@@ -1,0 +1,9 @@
+#02
+dn: uid=jdoe,ou=People,dc=univ-reunion,dc=fr
+changetype: add
+objectClass: inetOrgPerson
+sn: Doe
+givenName: John
+cn: Doe John
+uid: jdoe
+userPassword: {SSHA}zl3qqBDxwC9gW6b/sDQ6jjwL87QqvoO4eb5Z1+R3wKVZmO7NyMsk0A==
